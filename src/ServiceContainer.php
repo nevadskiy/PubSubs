@@ -3,11 +3,15 @@
 namespace App;
 
 class ServiceContainer {
-    public function bind(string $alias, $dependency)
+
+    protected $registry = [];
+
+    public static function bind(string $alias, $dependency)
     {
-       
+        self::$registry[$alials] = $dependency;
     }
-    public function get()
+
+    public static function get()
     {
        
     }
