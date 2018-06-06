@@ -1,4 +1,6 @@
 <?php
+
+namespace Tests;
 use PHPUnit\Framework\TestCase;
 use App\ServiceContainer;
 
@@ -13,10 +15,10 @@ class ServiceContainerTest extends TestCase
 
     public function getPropertyValue($name)
     {
-       $serviceReflection = new ReflectionClass(ServiceContainer::class);
-
+       $serviceReflection = new \ReflectionClass(ServiceContainer::class);
        $property = $serviceReflection->getProperty($name);
        $property->setAccessible(true);
+
        return $property->getValue();
     }
 
@@ -45,7 +47,7 @@ class ServiceContainerTest extends TestCase
     {
         ServiceContainer::bind('example', $this->service);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $service = ServiceContainer::get('another example');
     }
 }
