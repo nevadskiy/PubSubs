@@ -23,9 +23,25 @@ class EventBusTest extends TestCase
     /** @test */
     public function it_can_register_listener()
     {
-        $this->bus->subscribe(CustomEvent::class, new OnCustomEvent());
+        $listener = new OnCustomEvent();
 
-        $this->bus->dispatch(new CustomEvent('12'));
+        $this->bus->subscribe(CustomEvent::class, $listener);
 
+        $this->assertContains($listener, $this->bus->getEvents()[CustomEvent::class]);
+    }
+
+    /** @test */
+    public function it_can_dispatch_an_event()
+    {
+        $a = false;
+
+        $listener = function () use (&$a) {
+            $a = true;
+        };
+
+        $this->bus->subscribe(CustomEvent::class, $listener);
+        $this->bus->dispatch(new CustomEvent(12));
+
+        $this->assertTrue($a);
     }
 }

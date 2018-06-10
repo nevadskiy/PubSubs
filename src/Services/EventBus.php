@@ -19,4 +19,9 @@ class EventBus
             $trigger($event);
         }
     }
+
+    public function getEvents()
+    {
+        return $this->events;
+    }
 }

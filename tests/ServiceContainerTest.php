@@ -13,23 +13,12 @@ class ServiceContainerTest extends TestCase
         $this->service = new \StdClass();
     }
 
-    public function getPropertyValue($name)
-    {
-       $serviceReflection = new \ReflectionClass(ServiceContainer::class);
-       $property = $serviceReflection->getProperty($name);
-       $property->setAccessible(true);
-
-       return $property->getValue();
-    }
-
     /** @test */
     public function can_it_bind_service()
     {
         ServiceContainer::bind('example', $this->service);
 
-        $registry = $this->getPropertyValue('registry');
-
-        $this->assertContains($this->service, $registry);
+        $this->assertContains($this->service, ServiceContainer::getAll());
     }
 
     /** @test */
