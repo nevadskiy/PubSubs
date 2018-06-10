@@ -6,7 +6,7 @@ class ServiceContainer {
 
     protected static $registry = [];
 
-    public static function bind(string $alias, $dependency)
+    public static function bind(\string $alias, $dependency)
     {
         self::$registry[$alias] = $dependency;
     }

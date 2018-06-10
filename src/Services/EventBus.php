@@ -2,22 +2,13 @@
 
 namespace App\Services;
 
-use App\Events\CustomEvent;
-use App\Listeners\OnCustomEvent;
 use App\Events\EventInterface;
-use App\Listeners\ListenerInterface;
-
 
 class EventBus
 {
     protected $events = [];
 
-    // public function __construct()
-    // {
-    //     $this->subscribe(CustomEvent::class, new OnCustomEvent($event));
-    // }
-
-    public function subscribe(string $name, ListenerInterface $listener)
+    public function subscribe(string $name, callable $listener)
     {
         $this->events[$name][] = $listener;
     }
